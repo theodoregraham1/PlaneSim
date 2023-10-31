@@ -1,5 +1,8 @@
+import static java.lang.Math.sin;
+import static java.lang.Math.toRadians;
+
 public class Plane {
-    private int[] position;
+    private Coordinate position;
 
     // Velocity in m/s
     private int speed;
@@ -10,9 +13,7 @@ public class Plane {
     private String model;
 
     public Plane(int x, int y, int v, int theta, String m) {
-        this.position = new int[2];
-        this.position[0] = x;
-        this.position[1] = y;
+        this.position = new Coordinate(x, y);
 
         this.speed = v;
         this.direction = theta;
@@ -23,8 +24,12 @@ public class Plane {
         this(pos[0], pos[1], v, theta, String m);
     }
 
+    public Coordinate futurePosition(int time) {
+        double velocityH = this.speed * sin(toRadians(direction));
+    }
+
     // Getters
-    public int[] getPosition() {
+    public Coordinate getPosition() {
         return this.position;
     }
     public int getSpeed() {
@@ -39,9 +44,11 @@ public class Plane {
 
 
     // Setters
-    public void setPosition(int[] newPos) {
+    public void setPosition(Coordinate newPos) {
         this.position = newPos;
     }
+    public void setX(int newX) {this.position.x = newX;}
+    public void setY(int newY) {this.position.y = newY;}
     public void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }

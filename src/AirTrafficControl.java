@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class AirTrafficControl {
-    public ArrayList<Plane> planes;
+    private ArrayList<Plane> planes;
 
     public AirTrafficControl() {
         planes = new ArrayList<>();
@@ -13,5 +13,11 @@ public class AirTrafficControl {
 
     public void addPlane(int x, int y, int v, int theta, String m) {
         planes.add(new Plane(x, y, v, theta, m));
+    }
+
+    public boolean willCollide(Plane plane1, Plane plane2) {
+        /*
+
+         */
     }
 }
