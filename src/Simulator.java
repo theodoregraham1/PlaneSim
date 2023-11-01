@@ -13,6 +13,10 @@ public class Simulator {
     }
 
     public void simulate() {
+        while (currentTime < 100) {
+            advanceTime(currentTime);
 
+            currentTime += 0.5;
+        }
     }
 }
