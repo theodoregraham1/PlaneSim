@@ -1,31 +1,39 @@
-import java.lang.reflect.Parameter;
-
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class FlyingPlane extends Plane {
 
     // Velocity in m/s
-    private int speed;
+    private double speed;
 
     // Angle from North in degrees
-    private int direction;
+    private double direction;
+    private Airport destination;
 
     // Constructors
-    public FlyingPlane(ParkedPlane parkedPlane) {
+    public FlyingPlane(ParkedPlane parkedPlane, Airport destination) {
         super(parkedPlane);
+        this.destination = destination;
     }
-    public FlyingPlane(double x, double y, String model, String reg) {
+    public FlyingPlane(Plane plane, Airport destination) {
+        super(plane.getX(), plane.getY(), plane.getModel(), plane.getRegistration());
+        this.destination = destination;
+    }
+    public FlyingPlane(double x,
+                       double y,
+                       String model,
+                       String reg,
+                       Airport destination) {
         super(x, y, model, reg);
+        this.destination = destination;
     }
 
-    public Coordinate futurePosition(int time) {
+    public Coordinate futurePosition(double time) {
         double velocityX = this.speed * sin(toRadians(this.direction));
         double velocityY = this.speed * cos(toRadians(this.direction));
 
         return new Coordinate(
-                this.getX() * velocityX,
-                this.getY() * velocityY);
+                this.getX() + (velocityX * time),
+                this.getY() + (velocityY * time));
     }
 
     public double ETA(Coordinate pos) {
@@ -47,11 +55,14 @@ public class FlyingPlane extends Plane {
     }
 
     // Getters
-    public int getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
-    public int getDirection() {
+    public double getDirection() {
         return this.direction;
+    }
+    public Airport getDestination() {
+        return this.destination;
     }
 
     // Setters
