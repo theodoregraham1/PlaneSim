@@ -37,7 +37,13 @@ public class FlyingPlane extends Plane {
         double displacementX = this.getX() - pos.x;
         double displacementY = this.getX() - pos.y;
 
+        double timeX = displacementX / velocityX;
+        double timeY = displacementY/ velocityY;
 
+        if (timeX == timeY) {
+            return timeX;
+        }
+        return timeY;
     }
 
     // Getters
