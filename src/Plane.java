@@ -1,46 +1,38 @@
-import static java.lang.Math.sin;
-import static java.lang.Math.toRadians;
+import static java.lang.Math.*;
 
 public class Plane {
     private Coordinate position;
-
-    // Velocity in m/s
-    private int speed;
-
-    // Angle from North in degrees
-    private int direction;
-
     private String model;
+    private String registration;
 
-    public Plane(int x, int y, int v, int theta, String m) {
+    public Plane(double x, double y, String model, String reg) {
         this.position = new Coordinate(x, y);
 
-        this.speed = v;
-        this.direction = theta;
-        this.model = m;
+        this.model = model;
+        this.registration = reg;
     }
     
-    public Plane(int[] pos, int v, int theta, String m) {
-        this(pos[0], pos[1], v, theta, String m);
+    public Plane(Coordinate pos, String m, String reg) {
+        this(pos.x, pos.y, m, reg);
     }
 
-    public Coordinate futurePosition(int time) {
-        double velocityH = this.speed * sin(toRadians(direction));
+    public Plane(ParkedPlane parkedPlane) {
+        this(parkedPlane.getPosition(), parkedPlane.getModel(), parkedPlane.getRegistration());
     }
 
     // Getters
     public Coordinate getPosition() {
         return this.position;
     }
-    public int getSpeed() {
-        return this.speed;
-    }
-    public int getDirection() {
-        return this.direction;
-    }
+    public double getX() {return this.position.x;}
+    public double getY() {return this.position.y;}
     public String getModel() {
         return this.model;
     }
+    public String getRegistration() {
+        return this.registration;
+    }
+
 
 
     // Setters
@@ -49,10 +41,5 @@ public class Plane {
     }
     public void setX(int newX) {this.position.x = newX;}
     public void setY(int newY) {this.position.y = newY;}
-    public void setSpeed(int newSpeed) {
-        this.speed = newSpeed;
-    }
-    public void setDirection(int newDirection) {
-        this.direction = newDirection;
-    }
+
 }

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class AirTrafficControl {
     private ArrayList<Plane> planes;
+    private ArrayList<Airport> airports;
 
     public AirTrafficControl() {
         planes = new ArrayList<>();
