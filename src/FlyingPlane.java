@@ -1,30 +1,22 @@
 import static java.lang.Math.*;
 
 public class FlyingPlane extends Plane {
-
     // Velocity in m/s
+    public static final double DEFAULT_SPEED = 10;
     private double speed;
 
     // Angle from North in degrees
     private double direction;
+
     private Airport destination;
 
     // Constructors
     public FlyingPlane(ParkedPlane parkedPlane, Airport destination) {
         super(parkedPlane);
         this.destination = destination;
-    }
-    public FlyingPlane(Plane plane, Airport destination) {
-        super(plane.getX(), plane.getY(), plane.getModel(), plane.getRegistration());
-        this.destination = destination;
-    }
-    public FlyingPlane(double x,
-                       double y,
-                       String model,
-                       String reg,
-                       Airport destination) {
-        super(x, y, model, reg);
-        this.destination = destination;
+
+        this.direction = findBearing(destination.getPosition());
+        this.speed = DEFAULT_SPEED;
     }
 
     public Coordinate futurePosition(double time) {
@@ -54,6 +46,13 @@ public class FlyingPlane extends Plane {
         return timeY;
     }
 
+    public double findBearing(Coordinate coordinate) {
+        double displacementX = this.getX() - coordinate.x;
+        double displacementY = this.getX() - coordinate.y;
+
+        return toDegrees(atan(displacementX / displacementY));
+    }
+
     // Getters
     public double getSpeed() {
         return this.speed;
@@ -71,6 +70,12 @@ public class FlyingPlane extends Plane {
     }
     public void setDirection(int newDirection) {
         this.direction = newDirection;
+    }
+
+    public String toString() {
+        return super.toString()
+                + ", with velocity of " + this.speed
+                + " with bearing " + this.direction;
     }
 }
 

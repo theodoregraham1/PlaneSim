@@ -30,12 +30,9 @@ public class AirTrafficControl {
         planesInAir.add(newPlane);
     }
 
-    public void addPlane(int x, int y, String model, String reg) {
-        planesInAir.add(new FlyingPlane(x, y, model, reg, randomAirport()));
-    }
-
     public void landPlane(FlyingPlane plane, Airport airport) {
         ParkedPlane landedPlane = new ParkedPlane(this.currentTime+10, plane);
+        landedPlane.setPosition(airport.getPosition());
         airport.addPlane(landedPlane);
     }
 

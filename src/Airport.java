@@ -16,7 +16,6 @@ public class Airport {
 
         // Remove old one
         planes[standNumber] = null;
-
         return departure;
     }
 
