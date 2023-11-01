@@ -39,4 +39,13 @@ public class Plane {
     }
     public void setX(int newX) {this.position.x = newX;}
     public void setY(int newY) {this.position.y = newY;}
+
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("Flight: ").append(registration);
+        output.append(" of model ").append(model);
+        output.append(" at position ").append(position);
+
+        return output.toString();
+    }
 }
