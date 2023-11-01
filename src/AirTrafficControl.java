@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
 public class AirTrafficControl {
-    private ArrayList<Plane> planes;
+    private ArrayList<FlyingPlane> planes;
     private ArrayList<Airport> airports;
 
     public AirTrafficControl() {
         planes = new ArrayList<>();
     }
 
-    public void addPlane(Plane newPlane) {
+    public void addPlane(FlyingPlane newPlane) {
         planes.add(newPlane);
     }
 
-    public void addPlane(int x, int y, int v, int theta, String m) {
-        planes.add(new Plane(x, y, v, theta, m));
+    public void addPlane(int x, int y, int v, String model, String reg) {
+        planes.add(new FlyingPlane(x, y, model, reg));
     }
 
     public boolean willCollide(Plane plane1, Plane plane2) {

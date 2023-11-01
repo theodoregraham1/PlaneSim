@@ -11,19 +11,33 @@ public class FlyingPlane extends Plane {
     // Angle from North in degrees
     private int direction;
 
-    public FlyingPlane(ParkedPlane) {
-        super(ParkedPlane);
+    // Constructors
+    public FlyingPlane(ParkedPlane parkedPlane) {
+        super(parkedPlane);
+    }
+    public FlyingPlane(double x, double y, String model, String reg) {
+        super(x, y, model, reg);
     }
 
     public Coordinate futurePosition(int time) {
         double velocityX = this.speed * sin(toRadians(this.direction));
         double velocityY = this.speed * cos(toRadians(this.direction));
 
-        Coordinate newPos = this.position = new Coordinate(
+        return new Coordinate(
                 this.getX() * velocityX,
                 this.getY() * velocityY);
+    }
 
-        return newPos;
+    public double ETA(Coordinate pos) {
+        // Returns the time when the plane will reach pos, if it will never reach pos it will be -1
+
+        double velocityX = this.speed * sin(toRadians(this.direction));
+        double velocityY = this.speed * cos(toRadians(this.direction));
+
+        double displacementX = this.getX() - pos.x;
+        double displacementY = this.getX() - pos.y;
+
+
     }
 
     // Getters
