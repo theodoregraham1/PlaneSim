@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Airport {
+    private final String name;
+    private final String IATACode;
+
     private final ParkedPlane[] planes;
     private final Coordinate position;
 
@@ -54,5 +57,18 @@ public class Airport {
 
         // Add plane
         planes[i] = newPlane;
+    }
+
+    public String toString() {
+        StringBuilder output = new StringBuilder;
+
+        output.append("Airport: ").append(this.name);
+        output.append(" ").append(this.IATACode);
+        output.append("\n Planes: \n")
+        
+        for (ParkedPlane p: this.planes) {
+            StringBuilder.append(p.toString()).append("\n");
+        }
+        return output;
     }
 }
