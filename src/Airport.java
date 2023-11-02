@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Airport {
@@ -8,9 +7,12 @@ public class Airport {
     private final ParkedPlane[] planes;
     private final Coordinate position;
 
-    public Airport(int numberOfStands, Coordinate position) {
+    public Airport(int numberOfStands, Coordinate position, String name, String IATACode) {
         this.planes = new ParkedPlane[numberOfStands];
         this.position = position;
+
+        this.name = name;
+        this.IATACode = IATACode;
     }
 
     public ParkedPlane launchPlane(int standNumber) {
@@ -19,6 +21,7 @@ public class Airport {
 
         // Remove old one
         planes[standNumber] = null;
+
         return departure;
     }
 
