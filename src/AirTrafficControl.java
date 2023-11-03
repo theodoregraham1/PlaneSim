@@ -66,4 +66,23 @@ public class AirTrafficControl {
     private Airport randomAirport() {
         return airports.get(random.nextInt(airports.size()));
     }
+
+    public String toString() {
+      StringBuilder output = new StringBuilder();
+
+      output.append("========= Air Traffic Control =========\n");
+      output.append("Time ").append(this.currentTime);
+      
+      output.append("*-------- Airports --------*");
+      for (Airport a: airports) {
+        output.append(a.toString());
+      }
+
+      output.append("*-------- Planes in air --------*");
+      for (FlyingPlane p: this.planesInAir) {
+        output.append(p.toString());
+      }
+
+      return output.toString();
+    }
 }

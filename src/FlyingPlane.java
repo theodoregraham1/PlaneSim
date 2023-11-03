@@ -18,7 +18,16 @@ public class FlyingPlane extends Plane {
         this.direction = findBearing(destination.getPosition());
         this.speed = DEFAULT_SPEED;
     }
+    public FlyingPlane(double x, double y, String model, String reg, Airport destination) {
+      super(x, y, model, reg)
 
+      this.setFlightDetails(destination);
+    }
+  
+    public void setFlightDetails() {
+          
+    }
+  
     public Coordinate futurePosition(double time) {
         double velocityX = this.speed * sin(toRadians(this.direction));
         double velocityY = this.speed * cos(toRadians(this.direction));
