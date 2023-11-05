@@ -26,6 +26,9 @@ public class AirTrafficControl {
         );
     }
 
+    public void addAirport(Airport airport) {
+        airports.add(airport);
+    }
     public void addPlane(FlyingPlane newPlane) {
         planesInAir.add(newPlane);
     }
@@ -63,7 +66,7 @@ public class AirTrafficControl {
         }
     }
 
-    private Airport randomAirport() {
+    public Airport randomAirport() {
         return airports.get(random.nextInt(airports.size()));
     }
 

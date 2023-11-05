@@ -13,19 +13,20 @@ public class FlyingPlane extends Plane {
     // Constructors
     public FlyingPlane(ParkedPlane parkedPlane, Airport destination) {
         super(parkedPlane);
-        this.destination = destination;
 
-        this.direction = findBearing(destination.getPosition());
-        this.speed = DEFAULT_SPEED;
+        this.setFlightDetails(destination);
     }
     public FlyingPlane(double x, double y, String model, String reg, Airport destination) {
-      super(x, y, model, reg)
+      super(x, y, model, reg);
 
       this.setFlightDetails(destination);
     }
   
-    public void setFlightDetails() {
-          
+    public void setFlightDetails(Airport destination) {
+          this.destination = destination;
+          this.speed = DEFAULT_SPEED;
+
+          this.direction = findBearing(destination.getPosition());
     }
   
     public Coordinate futurePosition(double time) {

@@ -29,8 +29,10 @@ public class Airport {
     ArrayList<ParkedPlane> departures = new ArrayList<>();
 
     for (int i = 0; i < planes.length; i++) {
-      if (planes[i].getDepartureTime() >= currentTime) {
-        departures.add(launchPlane(i));
+      if (planes[i] != null) {
+        if (planes[i].getDepartureTime() >= currentTime) {
+          departures.add(launchPlane(i));
+        }
       }
     }
 
