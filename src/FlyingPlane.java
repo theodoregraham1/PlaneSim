@@ -16,7 +16,7 @@ public class FlyingPlane extends Plane {
 
         this.setFlightDetails(destination);
     }
-    public FlyingPlane(double x, double y, String model, String reg, Airport destination) {
+    public FlyingPlane(String model, String reg, double x, double y, Airport destination) {
       super(x, y, model, reg);
 
       this.setFlightDetails(destination);
@@ -40,12 +40,15 @@ public class FlyingPlane extends Plane {
 
     public double ETA(Coordinate pos) {
         // Returns the time when the plane will reach pos, if it will never reach pos it will be -1
+        if (Double.compare(pos.x, this.getX()) == 0 && Double.compare(pos.y, this.getY() )== 0) {
+            return 0;
+        }
 
         double velocityX = this.speed * sin(toRadians(this.direction));
         double velocityY = this.speed * cos(toRadians(this.direction));
 
-        double displacementX = this.getX() - pos.x;
-        double displacementY = this.getX() - pos.y;
+        double displacementX = abs(this.getX() - pos.x);
+        double displacementY = abs(this.getX() - pos.y);
 
         double timeX = displacementX / velocityX;
         double timeY = displacementY/ velocityY;
@@ -83,9 +86,10 @@ public class FlyingPlane extends Plane {
     }
 
     public String toString() {
-        return super.toString()
+        return super.toBasicString()
                 + ", with velocity of " + this.speed
-                + " with bearing " + this.direction;
+                + " with bearing " + this.direction
+                + " with destination " + this.destination.getName();
     }
 }
 

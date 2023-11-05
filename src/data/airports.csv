@@ -1,0 +1,4 @@
+standsNumber,x,y,name,IATAcode
+10,-10,30,Heathrow,LHR
+5,10,10,Stansted,STN
+15,-10,-5,Gatwick,LGW

@@ -1,28 +1,68 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
 public class Simulator {
-		AirTrafficControl atc;
-		double currentTime;
+    public static final String PLANES_FILE = "./src/data/planes.csv";
+    public static final String AIRPORTS_FILE = "./src/data/airports.csv";
+	public static final String COMMA = ",";
 
-		public Simulator() {
-				currentTime = 0;
-				atc = new AirTrafficControl(currentTime);
-		}
+	public static final double TIME_INCREMENT = 0.5;
+    AirTrafficControl atc;
+    double currentTime;
 
-		public void advanceTime(double increment) {
-				atc.incrementTime(increment);
-		}
+    public Simulator() {
+        currentTime = 0;
+        atc = new AirTrafficControl(currentTime);
+        this.readCSVsIn(atc);
+    }
 
-		public void simulate() {
-				atc.addAirport(new Airport(10, new Coordinate(30, 30), "Heathrow", "LHR"));
-				atc.addAirport(new Airport(5, new Coordinate(-5, -10), "Stansted", "STN"));
+    public void readCSVsIn(AirTrafficControl atc) {
+        // Read in airports
+        try (BufferedReader reader = new BufferedReader(new FileReader(AIRPORTS_FILE))) {
+            String line = reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(COMMA);
 
-				atc.addPlane(new FlyingPlane(0, 0, "A380", "G-XLEA", atc.randomAirport()));
-				atc.addPlane(new FlyingPlane(0, 0, "A380", "G-XLEB", atc.randomAirport()));
+                atc.addAirport(new Airport(
+                        Integer.parseInt(values[0]),
+                        new Coordinate(Double.parseDouble(values[1]), Double.parseDouble(values[2])),
+                        values[3],
+                        values[4]
+                ));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+		// Read in planes
+		try (BufferedReader reader = new BufferedReader(new FileReader(PLANES_FILE))) {
+			String line = reader.readLine();
+			while ((line = reader.readLine()) != null) {
+				String[] values = line.split(COMMA);
 
-			while (currentTime < 100) {
-						advanceTime(currentTime);
+				atc.addPlane(new FlyingPlane(
+                        values[0],
+                        values[1],
+                        Double.parseDouble(values[2]),
+                        Double.parseDouble(values[3]),
+                        atc.randomAirport()
+                ));
+			}
+		} catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-						currentTime += 0.5;
-				}
-		}
+    public void advanceTime(double increment) {
+        atc.incrementTime(increment);
+    }
+
+    public void simulate() {
+        while (currentTime < 30) {
+            advanceTime(TIME_INCREMENT);
+            currentTime += TIME_INCREMENT;
+        }
+    }
 }

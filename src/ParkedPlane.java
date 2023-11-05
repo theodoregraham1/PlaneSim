@@ -15,7 +15,7 @@ public class ParkedPlane extends Plane{
     }
 
     public String toString() {
-        return super.toString()
-                + ". Will depart at " + departureTime;
+        return super.toBasicString()
+                + ", will depart at " + departureTime;
     }
 }
