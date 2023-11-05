@@ -61,7 +61,7 @@ public class FlyingPlane extends Plane {
 
     public double findBearing(Coordinate coordinate) {
         double displacementX = this.getX() - coordinate.x;
-        double displacementY = this.getX() - coordinate.y;
+        double displacementY = this.getY() - coordinate.y;
 
         return toDegrees(atan(displacementX / displacementY));
     }
