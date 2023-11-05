@@ -28,12 +28,16 @@ public class AirTrafficControl {
 
     public void addAirport(Airport airport) {
         airports.add(airport);
+        System.out.println("Added " + airport.toString());
     }
+
     public void addPlane(FlyingPlane newPlane) {
         planesInAir.add(newPlane);
+        System.out.println("Added " + newPlane.toString());
     }
 
     public void landPlane(FlyingPlane plane, Airport airport) {
+        planesInAir.remove(plane);
         ParkedPlane landedPlane = new ParkedPlane(this.currentTime+10, plane);
         landedPlane.setPosition(airport.getPosition());
         airport.addPlane(landedPlane);

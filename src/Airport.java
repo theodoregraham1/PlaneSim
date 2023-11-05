@@ -45,11 +45,9 @@ public class Airport {
       return planes[index];
     return null;
   }
-
   public Plane[] getPlanes() {
     return planes;
   }
-
   public Coordinate getPosition() {
     return this.position;
   }
@@ -66,6 +64,13 @@ public class Airport {
   }
 
   public String toString() {
+    return "Airport: " + this.name
+            + " (" + this.IATACode
+            + "), at position " + this.position;
+
+  }
+
+  public String toFullString() {
     StringBuilder output = new StringBuilder();
 
     output.append("--------- Airport: ").append(this.name);
@@ -73,7 +78,9 @@ public class Airport {
     output.append("Planes: \n");
 
     for (ParkedPlane p : this.planes) {
-      output.append(p.toString()).append("\n");
+      if (p != null) {
+        output.append(p.toString()).append("\n");
+      }
     }
 
     return output.toString();

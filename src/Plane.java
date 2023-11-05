@@ -41,7 +41,7 @@ public class Plane {
 		public void setY(int newY) {this.position.y = newY;}
 
 		public String toString() {
-				return "Flight: " + registration
+				return "Plane: " + registration
 								+ " of model " + model
 								+ " at position " + position.toString();
 		}
