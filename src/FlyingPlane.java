@@ -63,7 +63,14 @@ public class FlyingPlane extends Plane {
         double displacementX = this.getX() - coordinate.x;
         double displacementY = this.getY() - coordinate.y;
 
-        return toDegrees(atan(displacementX / displacementY));
+        double ratio = displacementX/displacementY;
+        double angle = toDegrees(atan(abs(displacementX) / abs(displacementY)));
+        if (ratio > 0)
+            return angle;
+        else if (ratio < 0)
+            return -angle;
+        else
+            return 0;
     }
 
     // Getters
