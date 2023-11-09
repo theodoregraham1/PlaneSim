@@ -1,7 +1,7 @@
 public class Plane {
-    private Coordinate position;
-    private final String model;
-    private final String registration;
+    protected Coordinate position;
+    protected final String model;
+    protected final String registration;
 
     // Constructors
     public Plane(double x, double y, String model, String reg) {
@@ -9,10 +9,6 @@ public class Plane {
 
         this.model = model;
         this.registration = reg;
-    }
-
-    public Plane(Coordinate pos, String m, String reg) {
-        this(pos.x, pos.y, m, reg);
     }
 
     public Plane(ParkedPlane parkedPlane) {
