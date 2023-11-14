@@ -51,19 +51,19 @@ public class FlyingPlane extends Plane {
         double displacementX = abs(this.getX() - pos.x);
         double displacementY = abs(this.getY() - pos.y);
 
-        double timeX = displacementX / velocityX;
-        double timeY = displacementY / velocityY;
+        Double timeX = displacementX / velocityX;
+        Double timeY = displacementY / velocityY;
 
-        if (timeX == timeY) {
+        if (timeX.intValue() == timeY.intValue()) {
             return timeX;
         }
-        if (Double.isNaN(timeX)) {
-            if (timeY == Double.NaN) {
+        if (Double.isNaN(timeX) || timeX.intValue() == 0) {
+            if (Double.isNaN(timeY) || timeY.intValue() == 0) {
                 return 0;
             }
             return timeY;
         }
-        if (timeY == Double.NaN) {
+        if (Double.isNaN(timeY) || timeY.intValue() == 0) {
             return timeX;
         }
         return -1;

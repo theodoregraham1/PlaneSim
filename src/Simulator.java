@@ -56,6 +56,8 @@ public class Simulator {
 		} catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        atc.sortPlanes();
     }
 
     public void advanceTime(double increment) {
