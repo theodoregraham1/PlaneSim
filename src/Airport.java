@@ -30,6 +30,7 @@ public class Airport {
 
         for (int i = 0; i < planes.length; i++) {
             if (planes[i] != null) {
+
                 if (planes[i].getDepartureTime() <= currentTime) {
                     departures.add(launchPlane(i));
                 }

@@ -49,15 +49,24 @@ public class FlyingPlane extends Plane {
         double velocityY = this.speed * cos(toRadians(this.direction));
 
         double displacementX = abs(this.getX() - pos.x);
-        double displacementY = abs(this.getX() - pos.y);
+        double displacementY = abs(this.getY() - pos.y);
 
         double timeX = displacementX / velocityX;
-        double timeY = displacementY/ velocityY;
+        double timeY = displacementY / velocityY;
 
         if (timeX == timeY) {
             return timeX;
         }
-        return timeY;
+        if (Double.isNaN(timeX)) {
+            if (timeY == Double.NaN) {
+                return 0;
+            }
+            return timeY;
+        }
+        if (timeY == Double.NaN) {
+            return timeX;
+        }
+        return -1;
     }
 
     public double findBearing(Coordinate coordinate) {
@@ -71,12 +80,13 @@ public class FlyingPlane extends Plane {
 
         // Determine which quadrant the bearing is in and change it accordingly
         if (displacementX < 0) {
-            angle += 180; // Move into the last quadrant
             if (displacementY > 0) {
-                angle += 90; // Move into the second quadrant
+                return angle + 270; // Move into the second quadrant
             }
+            return angle + 180; // Move into the last quadrant
+
         } else if (displacementY < 0) {
-            angle += 90;
+            return angle + 90;
         }
         return angle;
     }

@@ -21,7 +21,10 @@ public class Simulator {
     public void readCSVsIn(AirTrafficControl atc) {
         // Read in airports
         try (BufferedReader reader = new BufferedReader(new FileReader(AIRPORTS_FILE))) {
+            // Remove headings
             String line = reader.readLine();
+
+            // Read data
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(COMMA);
 
@@ -62,6 +65,8 @@ public class Simulator {
     public void simulate() {
         while (currentTime < 30) {
             advanceTime(TIME_INCREMENT);
+            atc.sortPlanes();
+
             currentTime += TIME_INCREMENT;
         }
     }

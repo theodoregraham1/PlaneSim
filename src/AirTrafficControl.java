@@ -54,10 +54,13 @@ public class AirTrafficControl {
         // Move flying planes
         for (int i=0; i<planesInAir.size(); i++) {
             FlyingPlane p = planesInAir.get(i);
+
             // Land planes that are close enough
-            if (p.ETA(p.getDestination().getPosition()) < increment) {
+            double eta = p.ETA(p.getDestination().getPosition());
+            if (eta < increment && eta != -1) {
                 landPlane(p, p.getDestination());
             }
+
             // Move all others
             else {
                 p.setPosition(p.futurePosition(increment));
@@ -77,6 +80,29 @@ public class AirTrafficControl {
 
     public Airport randomAirport() {
         return airports.get(random.nextInt(airports.size()));
+    }
+
+    public void sortPlanes() {
+        // Sort planes by IATA code
+
+        int i = 0, smallest_index;
+
+        while (i < planesInAir.size()) {
+            smallest_index = i;
+            for (int j=i; j< planesInAir.size(); j++) {
+                if (planesInAir.get(j).getRegistration().compareTo(
+                        planesInAir.get(smallest_index).getRegistration()) < 0) {
+                    smallest_index = j;
+                }
+            }
+            if (smallest_index != i) {
+                // Put the lowest registration plane into new position
+                FlyingPlane placeHolder = planesInAir.get(smallest_index);
+                planesInAir.set(smallest_index, planesInAir.get(i));
+                planesInAir.set(i, placeHolder);
+            }
+            i++;
+        }
     }
 
     public String toString() {
