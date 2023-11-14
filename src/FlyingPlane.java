@@ -39,6 +39,8 @@ public class FlyingPlane extends Plane {
     }
 
     public double ETA(Coordinate pos) {
+        // This is all problematic
+
         // Returns the time when the plane will reach pos, if it will never reach pos it will be -1
         if (Double.compare(pos.x, this.getX()) == 0
                 && Double.compare(pos.y, this.getY() )== 0) {
@@ -70,13 +72,15 @@ public class FlyingPlane extends Plane {
     }
 
     public double findBearing(Coordinate coordinate) {
+        // This is all problematic
+
         // Find displacement
         double displacementX = coordinate.x - this.getX();
         double displacementY = coordinate.y - this.getY();
 
         // Find the angle to the vertical
         double ratio = displacementX / displacementY;
-        double angle = toDegrees(atan(ratio));
+        double angle = 180 - toDegrees(atan(ratio));
 
         // Determine which quadrant the bearing is in and change it accordingly
         if (displacementX < 0) {
